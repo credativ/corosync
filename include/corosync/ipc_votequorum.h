@@ -57,8 +57,9 @@ enum res_votequorum_types {
 	MESSAGE_RES_VOTEQUORUM_STATUS = 0,
 	MESSAGE_RES_VOTEQUORUM_GETINFO,
 	MESSAGE_RES_VOTEQUORUM_TRACKSTART,
-	MESSAGE_RES_VOTEQUORUM_NOTIFICATION,
-	MESSAGE_RES_VOTEQUORUM_EXPECTEDVOTES_NOTIFICATION
+	MESSAGE_RES_VOTEQUORUM_QUORUM_NOTIFICATION,
+	MESSAGE_RES_VOTEQUORUM_EXPECTEDVOTES_NOTIFICATION,
+	MESSAGE_RES_VOTEQUORUM_NODELIST_NOTIFICATION,
 };
 
 struct mar_votequorum_ring_id {
@@ -159,9 +160,14 @@ struct votequorum_node {
 	mar_uint32_t state;
 };
 
-struct res_lib_votequorum_notification {
+struct res_lib_votequorum_quorum_notification {
 	struct qb_ipc_response_header header __attribute__((aligned(8)));
 	mar_uint32_t quorate __attribute__((aligned(8)));
+	mar_uint64_t context __attribute__((aligned(8)));
+};
+
+struct res_lib_votequorum_nodelist_notification {
+	struct qb_ipc_response_header header __attribute__((aligned(8)));
 	mar_uint64_t context __attribute__((aligned(8)));
 	struct mar_votequorum_ring_id ring_id __attribute__((aligned(8)));
 	mar_uint32_t node_list_entries __attribute__((aligned(8)));
